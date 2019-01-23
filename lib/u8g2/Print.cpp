@@ -31,13 +31,13 @@ namespace Print
 {
 
   uint_fast8_t
-  Print::print (const char c)
+  Print::print (char c)
   {
     return write (c);
   }
 
   uint_fast8_t
-  Print::println (const char c)
+  Print::println (char c)
   {
     write (c);
     writeln ();

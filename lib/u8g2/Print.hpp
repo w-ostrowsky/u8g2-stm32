@@ -78,9 +78,9 @@ constexpr auto DEF_DIGITS = 4U;
     Print (const Print&&) = delete;
 
     uint_fast8_t
-    print (const char);
+    print (char);
     uint_fast8_t
-    println (const char);
+    println (char);
     uint_fast8_t
     print (const char* const);
     uint_fast8_t
