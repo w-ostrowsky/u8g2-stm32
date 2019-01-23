@@ -1,4 +1,4 @@
-
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : main.c
@@ -6,11 +6,11 @@
   ******************************************************************************
   ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether
+  * USER CODE END. Other portions of this file, whether 
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
-  * COPYRIGHT(c) 2018 STMicroelectronics
+  * COPYRIGHT(c) 2019 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -36,9 +36,10 @@
   *
   ******************************************************************************
   */
+/* USER CODE END Header */
+
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-#include "stm32l4xx_hal.h"
+#include <main.hpp>
 #include "crc.h"
 #include "dma.h"
 #include "rtc.h"
@@ -46,33 +47,46 @@
 #include "usart.h"
 #include "gpio.h"
 
+/* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "u8g2/u8g2lib.hpp"
 /* USER CODE END Includes */
 
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-/* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-
 /* USER CODE BEGIN PFP */
-/* Private function prototypes -----------------------------------------------*/
 
 /* USER CODE END PFP */
 
+/* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-using namespace u8g2lib;
+
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
-  *
-  * @retval None
+  * @retval int
   */
 int main(void)
 {
@@ -80,7 +94,7 @@ int main(void)
 
   /* USER CODE END 1 */
 
-  /* MCU Configuration----------------------------------------------------------*/
+  /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -104,9 +118,8 @@ int main(void)
   MX_CRC_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  using namespace u8g2lib;
   U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::FULL_PAGE> u8g2(U8G2_R0);
-  // u8g2_init_spi_hw(U8G2_R0);
   u8g2.begin();
   u8g2.setContrast(0);
   //u8g2.enableUTF8Print();
@@ -116,7 +129,6 @@ int main(void)
 
   uint32_t x = 0;
   uint32_t y = 30;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -125,6 +137,7 @@ int main(void)
   auto page = 0U;
   while (1)
   {
+    /* USER CODE END WHILE */
       u8g2.firstPage();
       // x++;
       if(x > 128)
@@ -140,21 +153,16 @@ int main(void)
 
       do
       {
-      u8g2.println(' ');
-      u8g2.eng((900.0 + page)*10e-9, 10);
+          u8g2.println('a');
+          u8g2.eng((900.0 + page)*10e-9, 10);
 
-       page+=11;
+           page+=11;
       } while(u8g2.nextPage());
       n++;
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
-      // HAL_Delay(2000);
+    /* USER CODE BEGIN 3 */
   }
-  /* USER CODE END WHILE */
-
-  /* USER CODE BEGIN 3 */
-
   /* USER CODE END 3 */
-
 }
 
 /**
@@ -163,20 +171,17 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  RCC_CRSInitTypeDef RCC_CRSInitStruct = {0};
 
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-  RCC_PeriphCLKInitTypeDef PeriphClkInit;
-  RCC_CRSInitTypeDef RCC_CRSInitStruct;
-
-    /**Configure LSE Drive Capability
-    */
+  /**Configure LSE Drive Capability 
+  */
   HAL_PWR_EnableBkUpAccess();
-
   __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
-
-    /**Initializes the CPU, AHB and APB busses clocks
-    */
+  /**Initializes the CPU, AHB and APB busses clocks 
+  */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -191,11 +196,10 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV8;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    _Error_Handler(__FILE__, __LINE__);
+    Error_Handler();
   }
-
-    /**Initializes the CPU, AHB and APB busses clocks
-    */
+  /**Initializes the CPU, AHB and APB busses clocks 
+  */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -205,42 +209,29 @@ void SystemClock_Config(void)
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
-    _Error_Handler(__FILE__, __LINE__);
+    Error_Handler();
   }
-
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART2;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
-    _Error_Handler(__FILE__, __LINE__);
+    Error_Handler();
   }
-
-    /**Configure the main internal regulator output voltage
-    */
+  /**Configure the main internal regulator output voltage 
+  */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
-    _Error_Handler(__FILE__, __LINE__);
+    Error_Handler();
   }
-
-    /**Configure the Systick interrupt time
-    */
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
-
-    /**Configure the Systick
-    */
-  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
-
-    /**Enable MSI Auto calibration
-    */
+  /**Enable MSI Auto calibration 
+  */
   HAL_RCCEx_EnableMSIPLLMode();
-
-    /**Enable the SYSCFG APB clock
-    */
+  /**Enable the SYSCFG APB clock 
+  */
   __HAL_RCC_CRS_CLK_ENABLE();
-
-    /**Configures CRS
-    */
+  /**Configures CRS 
+  */
   RCC_CRSInitStruct.Prescaler = RCC_CRS_SYNC_DIV1;
   RCC_CRSInitStruct.Source = RCC_CRS_SYNC_SOURCE_LSE;
   RCC_CRSInitStruct.Polarity = RCC_CRS_SYNC_POLARITY_RISING;
@@ -249,9 +240,6 @@ void SystemClock_Config(void)
   RCC_CRSInitStruct.HSI48CalibrationValue = 32;
 
   HAL_RCCEx_CRSConfig(&RCC_CRSInitStruct);
-
-  /* SysTick_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
 /* USER CODE BEGIN 4 */
@@ -260,17 +248,13 @@ void SystemClock_Config(void)
 
 /**
   * @brief  This function is executed in case of error occurrence.
-  * @param  file: The file name as string.
-  * @param  line: The line in file as a number.
   * @retval None
   */
-void _Error_Handler(char *file, int line)
+void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  while(1)
-  {
-  }
+
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -282,21 +266,13 @@ void _Error_Handler(char *file, int line)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{
+void assert_failed(char *file, uint32_t line)
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
