@@ -45,7 +45,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.hpp>
+#include "main.h"
 
 /* DMA memory to memory transfer handles -------------------------------------*/
 

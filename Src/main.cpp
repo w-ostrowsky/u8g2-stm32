@@ -39,7 +39,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.hpp>
+#include <main.h>
 #include "crc.h"
 #include "dma.h"
 #include "rtc.h"

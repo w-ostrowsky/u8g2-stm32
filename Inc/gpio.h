@@ -40,13 +40,12 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __gpio_H
 #define __gpio_H
-
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.hpp>
+#include "main.h"
 
 /* USER CODE BEGIN Includes */
 

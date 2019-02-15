@@ -39,13 +39,12 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __rtc_H
 #define __rtc_H
-
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.hpp>
+#include "main.h"
 
 /* USER CODE BEGIN Includes */
 

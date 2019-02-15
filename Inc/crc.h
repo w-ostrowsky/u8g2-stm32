@@ -39,13 +39,12 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __crc_H
 #define __crc_H
-
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.hpp>
+#include "main.h"
 
 /* USER CODE BEGIN Includes */
 
