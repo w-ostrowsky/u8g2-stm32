@@ -67,7 +67,7 @@ constexpr auto DEF_DIGITS = 4U;
       static constexpr auto  mask = 1U;
     };
 
-  constexpr uint_fast8_t TEXT_BUFFER_SIZE = 8U;
+  constexpr uint_fast8_t TEXT_BUFFER_SIZE = 16U;
 
   class Print
   {
@@ -82,9 +82,9 @@ constexpr auto DEF_DIGITS = 4U;
     uint_fast8_t
     println (char);
     uint_fast8_t
-    print (const char* const);
+    print (const char*);
     uint_fast8_t
-    println (const char* const);
+    println (const char*);
     uint_fast8_t
     print (const std::string &);
     uint_fast8_t

@@ -45,13 +45,13 @@ namespace Print
   }
 
   uint_fast8_t
-  Print::print (const char* const s)
+  Print::print (const char* s)
   {
     return write (s);
   }
 
   uint_fast8_t
-  Print::println (const char* const s)
+  Print::println (const char* s)
   {
     const auto n = write (s);
     writeln ();
