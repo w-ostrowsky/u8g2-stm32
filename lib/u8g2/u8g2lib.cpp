@@ -32,6 +32,9 @@ U8G2<CHIP_TYPE::SSD1305, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x32, MODE::HAL
     u8g2_Setup_ssd1305_128x32_noname_1(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
 }
 
+/*
+ *  SH1106
+ */
 template<>
 U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
 {
@@ -53,8 +56,123 @@ U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x64, MODE::FULL
 template<>
 U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
 {
-    u8g2_Setup_sh1106_128x64_noname_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+   u8g2_Setup_sh1106_128x64_noname_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
 }
+
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x64, MODE::FULL_BUFFER>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_noname_f(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::FULL_BUFFER>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+   u8g2_Setup_sh1106_128x64_noname_f(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+}
+
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::WINSTAR_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_winstar_1(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::WINSTAR_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_winstar_1(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::WINSTAR_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_winstar_2(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::WINSTAR_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+   u8g2_Setup_sh1106_128x64_winstar_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::VCOMH0_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_vcomh0_1(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::VCOMH0_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_vcomh0_1(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_SW, DISPLAY::VCOMH0_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_sh1106_128x64_vcomh0_2(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::VCOMH0_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+   u8g2_Setup_sh1106_128x64_vcomh0_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+}
+
+/*
+ * SSD1306
+ */
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_noname_1(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_noname_1(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_SW, DISPLAY::NONAME_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_noname_2(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+   u8g2_Setup_ssd1306_128x64_noname_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_SW, DISPLAY::ALT0_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_alt0_1(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_HW, DISPLAY::ALT0_128x64, MODE::HALF_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_alt0_1(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_SW, DISPLAY::ALT0_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+    u8g2_Setup_ssd1306_128x64_alt0_2(&u8g2, rotation, u8x8_byte_4wire_sw_spi, u8x8_gpio_and_delay);
+}
+
+template<>
+U8G2<CHIP_TYPE::SSD1306, INTERFACE::SPI_4W_HW, DISPLAY::ALT0_128x64, MODE::FULL_PAGE>::U8G2(const u8g2_cb_t *rotation): U8G2()
+{
+   u8g2_Setup_ssd1306_128x64_alt0_2(&u8g2, rotation, u8x8_byte_hw_spi, u8x8_gpio_and_delay );
+}
+
+
 
 template<CHIP_TYPE ICT, INTERFACE IO_TYPE, DISPLAY D_NAME, MODE MODE>
 size_t U8G2<ICT, IO_TYPE, D_NAME, MODE>::write(const char c)

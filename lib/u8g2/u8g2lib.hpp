@@ -62,12 +62,13 @@ enum class INTERFACE
     I8080,  // A 8-Bit bus which requires 8 data lines, chip select and a write strobe signal.
     M6800   // 8-bit parallel interface, 6800 protocol
 };
+
 enum class DISPLAY
 {
     NONE, NONAME_60x32, NONAME_64x32, NONAME_64x48, NONAME_96x16, NONAME_96x96,
     NONAME_128x32,
     ADAFRUIT_128x32, NONAME_128x64, NONAME_128x96, NONAME_128x128
-    , NONAME_192x32
+    , NONAME_192x32, WINSTAR_128x64, VCOMH0_128x64, ALT0_128x64
 };
 
 enum class MODE
