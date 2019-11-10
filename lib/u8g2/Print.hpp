@@ -104,7 +104,7 @@ constexpr auto DEF_DIGITS = 4U;
             (std::is_unsigned<T>::value) && (std::is_same<BASE, DEC>::value),
             bool>::type = true>
       uint_fast8_t
-      print (const T num)
+      print (T num)
       {
         m_intLen = printIntegerNumber (num);
         if (!m_correctlyCovertedToText)
@@ -120,7 +120,7 @@ constexpr auto DEF_DIGITS = 4U;
             (std::is_unsigned<T>::value) && (std::is_same<BASE, HEX>::value),
             bool>::type = true>
       uint_fast8_t
-      print (const T num)
+      print (T num)
       {
         m_intLen = printIntegerNumber<T, BASE> (static_cast<T> (num));
         if ((m_intLen > static_cast<decltype(m_intLen)> (TEXT_BUFFER_SIZE - 2U))
@@ -144,7 +144,7 @@ constexpr auto DEF_DIGITS = 4U;
             (!std::is_unsigned<T>::value) && (std::is_same<BASE, DEC>::value),
             bool>::type = true>
       uint_fast8_t
-      print (const T num)
+      print (T num)
       {
         static_assert(std::is_integral<T>::value);
         T c = (num < 0)? (-num) : num;
@@ -170,7 +170,7 @@ constexpr auto DEF_DIGITS = 4U;
             (!std::is_unsigned<T>::value) && (std::is_same<BASE, HEX>::value),
             bool>::type = true>
       uint_fast8_t
-      print (const T num)
+      print (T num)
       {
         using Unsigned_t = typename std::make_unsigned<T>::type;
         Unsigned_t c = static_cast<Unsigned_t>(num);
@@ -231,7 +231,7 @@ constexpr auto DEF_DIGITS = 4U;
         (std::is_same<BASE, HEX>::value) || (std::is_same<BASE, DEC>::value),
         bool>::type = true>
       uint_fast8_t
-      println (const T num)
+      println (T num)
       {
         static_assert(std::is_integral<T>::value);
         const auto n = print<BASE> (num);
@@ -241,9 +241,9 @@ constexpr auto DEF_DIGITS = 4U;
 
   protected:
     virtual size_t
-    write (const char) = 0;
+    write (char) = 0;
     virtual size_t
-    write (const char16_t) = 0;
+    write (char16_t) = 0;
     virtual void
     writeln () = 0;
     virtual size_t
@@ -270,8 +270,8 @@ constexpr auto DEF_DIGITS = 4U;
     NUM_ERRORS
     checkFloat (double);
     NUM_ERRORS
-    checkFloat (double, uint_fast8_t, const uint_fast8_t printFrom = 0U,
-                const bool rnd = true);
+    checkFloat (double, uint_fast8_t, uint_fast8_t printFrom = 0U,
+                bool rnd = true);
     void
     printFloatNumber (bool fixDP = false);
     void

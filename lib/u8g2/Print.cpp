@@ -72,7 +72,7 @@ namespace Print
   }
 
   uint_fast8_t
-  Print::print (double number, uint_fast8_t digits, const bool fixDP)
+  Print::print (double number, uint_fast8_t digits, bool fixDP)
   {
     if (checkFloat (number) == NUM_ERRORS::Ok)
       {
@@ -92,7 +92,7 @@ namespace Print
   }
 
   uint_fast8_t
-  Print::eng (double number, uint_fast8_t digits, const bool fixDP)
+  Print::eng (double number, uint_fast8_t digits, bool fixDP)
   {
     if (checkFloat (number) == NUM_ERRORS::Ok)
       {
@@ -196,7 +196,7 @@ namespace Print
   }
 
   uint_fast8_t
-  Print::sci (double number, uint_fast8_t digits, const bool fixDP)
+  Print::sci (double number, uint_fast8_t digits, bool fixDP)
   {
     if (checkFloat (number) == NUM_ERRORS::Ok)
       {
@@ -207,7 +207,7 @@ namespace Print
   }
 
   uint_fast8_t
-  Print::println (double number, uint_fast8_t digits, const bool fixDP)
+  Print::println (double number, uint_fast8_t digits, bool fixDP)
   {
     const auto n = print (number, digits, fixDP);
     writeln ();
@@ -309,7 +309,7 @@ namespace Print
 
   NUM_ERRORS
   Print::checkFloat (double number, uint_fast8_t usedSpace,
-                     const uint_fast8_t printFrom, const bool round)
+                     uint_fast8_t printFrom, bool round)
   {
     if (number
         < static_cast<decltype(number)> (std::numeric_limits<decltype(m_intPart)>::max ()))
