@@ -216,8 +216,7 @@ namespace Print
 
 //privates:
 
-  template<class T, typename std::enable_if<std::is_integral<T>::value>::type* =
-      nullptr>
+  template<class T, typename std::enable_if<std::is_integral<T>{}, int>::type = 0>
     constexpr uint_fast8_t
     numDigits (T x)
     {
@@ -255,7 +254,7 @@ namespace Print
     }
 
   template<class T,
-      typename std::enable_if<!(std::is_integral<T>::valuet)>::type* = nullptr>
+      typename std::enable_if<!(std::is_integral<T>{}), int>::type = 0>
     constexpr uint_fast8_t
     numDigits (T x)
     {
@@ -263,7 +262,7 @@ namespace Print
       x = x < 0 ? -x : x;
       while (x > 0)
         {
-          x /= 10U;
+          x /= 10;
           len++;
         }
       return len;

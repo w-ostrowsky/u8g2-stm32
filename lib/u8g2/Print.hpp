@@ -101,8 +101,7 @@ constexpr auto DEF_DIGITS = 4U;
 
     template<typename BASE = DEC, typename T,
         typename std::enable_if<
-            (std::is_unsigned<T>::value) && (std::is_same<BASE, DEC>::value),
-            bool>::type = true>
+            (std::is_same<BASE, DEC>{} && std::is_unsigned<T>{}), int>::type = 0>
       uint_fast8_t
       print (T num)
       {
@@ -117,8 +116,7 @@ constexpr auto DEF_DIGITS = 4U;
 
     template<typename BASE = DEC, typename T,
         typename std::enable_if<
-            (std::is_unsigned<T>::value) && (std::is_same<BASE, HEX>::value),
-            bool>::type = true>
+        (std::is_same<BASE, HEX>{} && std::is_unsigned<T>{}), int>::type = 0>
       uint_fast8_t
       print (T num)
       {
@@ -141,8 +139,7 @@ constexpr auto DEF_DIGITS = 4U;
 
     template<typename BASE = DEC, typename T,
         typename std::enable_if<
-            (!std::is_unsigned<T>::value) && (std::is_same<BASE, DEC>::value),
-            bool>::type = true>
+            (std::is_same<BASE, DEC>{} && std::is_signed<T>{}), int>::type = 0>
       uint_fast8_t
       print (T num)
       {
@@ -167,8 +164,7 @@ constexpr auto DEF_DIGITS = 4U;
 
     template<typename BASE = DEC, typename T,
         typename std::enable_if<
-            (!std::is_unsigned<T>::value) && (std::is_same<BASE, HEX>::value),
-            bool>::type = true>
+        (std::is_same<BASE, HEX>{} && std::is_signed<T>{}), int>::type = 0>
       uint_fast8_t
       print (T num)
       {
@@ -227,9 +223,7 @@ constexpr auto DEF_DIGITS = 4U;
         return m_intLen;
       }
 
-    template<typename BASE = DEC, typename T, typename std::enable_if<
-        (std::is_same<BASE, HEX>::value) || (std::is_same<BASE, DEC>::value),
-        bool>::type = true>
+    template<typename BASE = DEC, typename T>
       uint_fast8_t
       println (T num)
       {
