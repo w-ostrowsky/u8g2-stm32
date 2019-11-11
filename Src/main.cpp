@@ -39,7 +39,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include <main.h>
+#include "main.h"
 #include "crc.h"
 #include "dma.h"
 #include "rtc.h"
@@ -93,6 +93,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -117,6 +118,7 @@ int main(void)
   MX_RTC_Init();
   MX_CRC_Init();
   MX_SPI1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   using namespace u8g2lib;
   U8G2<CHIP_TYPE::SH1106, INTERFACE::SPI_4W_HW, DISPLAY::NONAME_128x64, MODE::FULL_PAGE> u8g2(U8G2_R0);
@@ -138,28 +140,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-      u8g2.firstPage();
-      // x++;
-      if(x > 128)
-      {
-          x = 0;
-          y++;
-      }
-      if(y > 64)
-      {
-          y = 10;
-      }
-      u8g2.setCursor(x,y);
 
-      do
-      {
-          u8g2.println('a');
-          u8g2.eng((900.0 + page)*10e-9, 10);
-
-           page+=11;
-      } while(u8g2.nextPage());
-      n++;
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -174,16 +155,11 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  RCC_CRSInitTypeDef RCC_CRSInitStruct = {0};
 
-  /**Configure LSE Drive Capability 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
-  /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -198,7 +174,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -211,35 +187,21 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART2;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART1
+                              |RCC_PERIPHCLK_USART2;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
-  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
-  /**Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage 
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
     Error_Handler();
   }
-  /**Enable MSI Auto calibration 
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
-  /**Enable the SYSCFG APB clock 
-  */
-  __HAL_RCC_CRS_CLK_ENABLE();
-  /**Configures CRS 
-  */
-  RCC_CRSInitStruct.Prescaler = RCC_CRS_SYNC_DIV1;
-  RCC_CRSInitStruct.Source = RCC_CRS_SYNC_SOURCE_LSE;
-  RCC_CRSInitStruct.Polarity = RCC_CRS_SYNC_POLARITY_RISING;
-  RCC_CRSInitStruct.ReloadValue = __HAL_RCC_CRS_RELOADVALUE_CALCULATE(48000000,32768);
-  RCC_CRSInitStruct.ErrorLimitValue = 34;
-  RCC_CRSInitStruct.HSI48CalibrationValue = 32;
-
-  HAL_RCCEx_CRSConfig(&RCC_CRSInitStruct);
 }
 
 /* USER CODE BEGIN 4 */
